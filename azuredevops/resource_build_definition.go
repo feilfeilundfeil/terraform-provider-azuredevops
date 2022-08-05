@@ -1091,11 +1091,12 @@ func expandBuildDefinition(d *schema.ResourceData) (*build.BuildDefinition, stri
 		}
 
 		var phase = &build.Phase{
-			Name:      &phaseName,
-			RefName:   &refName,
-			Condition: &condition,
-			Steps:     &steps,
-			Target:    target,
+			Name:                  &phaseName,
+			RefName:               &refName,
+			Condition:             &condition,
+			Steps:                 &steps,
+			Target:                target,
+			JobAuthorizationScope: &build.BuildAuthorizationScopeValues.ProjectCollection,
 		}
 		var phases = []build.Phase{
 			*phase,
@@ -1130,10 +1131,11 @@ func expandBuildDefinition(d *schema.ResourceData) (*build.BuildDefinition, stri
 	}
 
 	buildDefinition := build.BuildDefinition{
-		Id:       buildDefinitionReference,
-		Name:     converter.String(d.Get("name").(string)),
-		Path:     converter.String(d.Get("path").(string)),
-		Revision: converter.Int(d.Get("revision").(int)),
+		Id:                    buildDefinitionReference,
+		JobAuthorizationScope: &build.BuildAuthorizationScopeValues.ProjectCollection,
+		Name:                  converter.String(d.Get("name").(string)),
+		Path:                  converter.String(d.Get("path").(string)),
+		Revision:              converter.Int(d.Get("revision").(int)),
 		Repository: &build.BuildRepository{
 			Url:           &repoURL,
 			Id:            &repoName,
