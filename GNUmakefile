@@ -1,6 +1,8 @@
 TEST?=$$(go list ./... |grep -v 'vendor')
 WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=azuredevops
+VERSION=0.0.7
+BINARY=terraform-provider-${PKG_NAME}_v${VERSION}
 TESTTIMEOUT=180m
 
 .EXPORT_ALL_VARIABLES:
@@ -21,6 +23,17 @@ tools:
 
 build: fmtcheck
 	go install
+
+release:
+	mkdir -p ${PKG_NAME}/${VERSION}/linux_amd64
+	mkdir -p ${PKG_NAME}/${VERSION}/windows_amd64
+	mkdir -p ${PKG_NAME}/${VERSION}/darwin_amd64
+	GOOS=linux GOARCH=amd64 go build -o ${BINARY}
+	mv ${BINARY} ${PKG_NAME}/${VERSION}/linux_amd64
+	GOOS=windows GOARCH=amd64 go build -o ${BINARY}
+	mv ${BINARY} ${PKG_NAME}/${VERSION}/windows_amd64
+	GOOS=darwin GOARCH=amd64 go build -o ${BINARY}
+	mv ${BINARY} ${PKG_NAME}/${VERSION}/darwin_amd64
 
 fmt:
 	@echo "==> Fixing source code with gofmt..."
