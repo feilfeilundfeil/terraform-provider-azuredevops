@@ -97,6 +97,13 @@ func resourceBuildDefinition() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
+			// FFUF Start - Shared libs
+			"allow_scripts_auth_access_option": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
+			},
+			// FFUF End
 			"revision": {
 				Type:     schema.TypeInt,
 				Computed: true,
@@ -1072,7 +1079,9 @@ func expandBuildDefinition(d *schema.ResourceData) (*build.BuildDefinition, stri
 
 	agentPoolName := d.Get("agent_pool_name").(string)
 	agentPoolIsHosted := agentPoolName != "Default"
-
+	// FFUF Start - Shared Libs
+	var allowScriptsAuthAccessOption = d.Get("allow_scripts_auth_access_option").(bool)
+	// FFUF End
 	var process interface{}
 
 	ymlPath := converter.String(repository["yml_path"].(string))
@@ -1088,6 +1097,9 @@ func expandBuildDefinition(d *schema.ResourceData) (*build.BuildDefinition, stri
 		var Type = 1
 		var target = &build.PhaseTarget{
 			Type: &Type,
+			// FFUF Start - Shared Libs
+			AllowScriptsAuthAccessOption: &allowScriptsAuthAccessOption,
+			// FFUF End
 		}
 
 		var phase = &build.Phase{
