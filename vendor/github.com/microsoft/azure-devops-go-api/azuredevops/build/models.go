@@ -1521,9 +1521,6 @@ type Phase struct {
 type PhaseTarget struct {
 	// The type of the target.
 	Type *int `json:"type,omitempty"`
-	// FFUF Start - Shared Libs
-	AllowScriptsAuthAccessOption *bool `json:"allowScriptsAuthAccessOption,omitempty"`
-	// FFUF End
 }
 
 type ProcessTemplateType string
