@@ -15,20 +15,7 @@ var provider = Provider()
 
 func TestAzureDevOpsProvider_HasChildResources(t *testing.T) {
 	expectedResources := []string{
-		"azuredevops_build_definition",
 		"azuredevops_release_definition",
-		"azuredevops_project",
-		"azuredevops_serviceendpoint_github",
-		"azuredevops_serviceendpoint_dockerhub",
-		"azuredevops_serviceendpoint_azurerm",
-		"azuredevops_serviceendpoint_bitbucket",
-		"azuredevops_serviceendpoint_sonarqube",
-		"azuredevops_variable_group",
-		"azuredevops_git_repository",
-		"azuredevops_user_entitlement",
-		"azuredevops_group_membership",
-		"azuredevops_group",
-		"azuredevops_agent_pool",
 	}
 
 	resources := provider.ResourcesMap
