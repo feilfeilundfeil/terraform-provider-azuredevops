@@ -91,7 +91,7 @@ func TestAccAzureDevOpsReleaseDefinition_CreateAndUpdate(t *testing.T) {
 	//releaseDefinitionPathThird := releaseDefinitionNameFirst + `\` + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 	//releaseDefinitionPathFourth := releaseDefinitionNameSecond + `\` + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 
-	tfReleaseDefNode := "azuredevops_release_definition.release"
+	tfReleaseDefNode := "azuredevopsffuf_release_definition.release"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testhelper.TestAccPreCheck(t, nil) },
 		Providers:    testAccProviders,
@@ -163,7 +163,7 @@ func TestAccAzureDevOpsReleaseDefinition_CreateAndUpdate_Temp(t *testing.T) {
 	releaseDefinitionPathEmpty := ""
 	releaseDefinitionNameFirst := testhelper.TestAccResourcePrefix + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 
-	tfReleaseDefNode := "azuredevops_release_definition.release"
+	tfReleaseDefNode := "azuredevopsffuf_release_definition.release"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testhelper.TestAccPreCheck(t, nil) },
 		Providers:    testAccProviders,
@@ -188,7 +188,7 @@ func TestAccAzureDevOpsReleaseDefinition_CreateAndUpdate_Agentless(t *testing.T)
 	releaseDefinitionPathEmpty := ""
 	releaseDefinitionNameFirst := testhelper.TestAccResourcePrefix + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 
-	tfReleaseDefNode := "azuredevops_release_definition.release"
+	tfReleaseDefNode := "azuredevopsffuf_release_definition.release"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testhelper.TestAccPreCheck(t, nil) },
 		Providers:    testAccProviders,
@@ -212,7 +212,7 @@ func TestAccAzureDevOpsReleaseDefinition_CreateAndUpdate_Agentless(t *testing.T)
 // or not the definition (1) exists in the state and (2) exist in AzDO and (3) has the correct name
 func testAccCheckReleaseDefinitionResourceExists(expectedName string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		releaseDef, ok := s.RootModule().Resources["azuredevops_release_definition.release"]
+		releaseDef, ok := s.RootModule().Resources["azuredevopsffuf_release_definition.release"]
 		if !ok {
 			return fmt.Errorf("Did not find a release definition in the TF state")
 		}
@@ -234,7 +234,7 @@ func testAccCheckReleaseDefinitionResourceExists(expectedName string) resource.T
 // *after* terraform destroys the resource but *before* the state is wiped clean.
 func testAccReleaseDefinitionCheckDestroy(s *terraform.State) error {
 	for _, resource := range s.RootModule().Resources {
-		if resource.Type != "azuredevops_release_definition" {
+		if resource.Type != "azuredevopsffuf_release_definition" {
 			continue
 		}
 

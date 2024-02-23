@@ -9,7 +9,7 @@ import (
 func Provider() *schema.Provider {
 	p := &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
-			"azuredevops_release_definition": resourceReleaseDefinition(),
+			"azuredevopsffuf_release_definition": resourceReleaseDefinition(),
 		},
 		Schema: map[string]*schema.Schema{
 			"org_service_url": {

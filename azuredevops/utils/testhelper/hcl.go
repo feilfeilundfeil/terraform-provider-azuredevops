@@ -245,7 +245,7 @@ resource "azuredevops_build_definition" "build" {
 func TestAccReleaseDefinitionResource(projectName string, releaseDefinitionName string, releasePath string) string {
 	tasks := TestAccReleaseDefinitionTasks()
 	releaseDefinitionResource := fmt.Sprintf(`
-resource "azuredevops_release_definition" "release" {
+resource "azuredevopsffuf_release_definition" "release" {
   project_id = "DevOps"
   name = "%s"
   path = "\\"
@@ -422,7 +422,7 @@ func TestAccReleaseDefinitionTasks() string {
 // TestAccReleaseDefinitionResourceTemp full terraform stanza to standup a release pipeline
 func TestAccReleaseDefinitionResourceTemp(projectName string, releaseDefinitionName string, releasePath string) string {
 	releaseDefinitionResource := fmt.Sprintf(`
-resource "azuredevops_release_definition" "release" {
+resource "azuredevopsffuf_release_definition" "release" {
   project_id = "DevOps" // TODO: revert this back to azuredevops_project.project.id
   name = "%s"
   path = "\\"
@@ -489,7 +489,7 @@ resource "azuredevops_release_definition" "release" {
 // TestAccReleaseDefinitionResourceAgentless full terraform stanza to standup a release pipeline
 func TestAccReleaseDefinitionResourceAgentless(projectName string, releaseDefinitionName string, releasePath string) string {
 	releaseDefinitionResource := fmt.Sprintf(`
-resource "azuredevops_release_definition" "release" {
+resource "azuredevopsffuf_release_definition" "release" {
   project_id = "DevOps"
   name = "%s"
   path = "\\"

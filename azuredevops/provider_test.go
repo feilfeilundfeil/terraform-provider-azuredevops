@@ -15,7 +15,7 @@ var provider = Provider()
 
 func TestAzureDevOpsProvider_HasChildResources(t *testing.T) {
 	expectedResources := []string{
-		"azuredevops_release_definition",
+		"azuredevopsffuf_release_definition",
 	}
 
 	resources := provider.ResourcesMap
