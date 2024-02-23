@@ -165,7 +165,8 @@ func resourceProjectRead(d *schema.ResourceData, m interface{}) error {
 
 // ProjectRead Lookup a project using the ID, or name if the ID is not set. Note, usage of the name in place
 // of the ID is an explicitly stated supported behavior:
-//		https://docs.microsoft.com/en-us/rest/api/azure/devops/core/projects/get?view=azure-devops-rest-5.0
+//
+//	https://docs.microsoft.com/en-us/rest/api/azure/devops/core/projects/get?view=azure-devops-rest-5.0
 func ProjectRead(clients *config.AggregatedClient, projectID string, projectName string) (*core.TeamProject, error) {
 	identifier := projectID
 	if identifier == "" {
@@ -343,22 +344,6 @@ func ParseImportedProjectIDAndID(clients *config.AggregatedClient, id string) (s
 	currentProject, err := ProjectRead(clients, project, project)
 	if err != nil {
 		return "", 0, err
-	}
-
-	return currentProject.Id.String(), resourceID, nil
-}
-
-// ParseImportedProjectIDAndUUID : Parse the Id (projectId/uuid) or (projectName/uuid)
-func ParseImportedProjectIDAndUUID(clients *config.AggregatedClient, id string) (string, string, error) {
-	project, resourceID, err := tfhelper.ParseImportedUUID(id)
-	if err != nil {
-		return "", "", err
-	}
-
-	// Get the project ID
-	currentProject, err := ProjectRead(clients, project, project)
-	if err != nil {
-		return "", "", err
 	}
 
 	return currentProject.Id.String(), resourceID, nil
