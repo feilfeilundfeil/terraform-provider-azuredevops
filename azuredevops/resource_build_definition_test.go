@@ -1,3 +1,4 @@
+//go:build all || resource_build_definition
 // +build all resource_build_definition
 
 package azuredevops
@@ -373,7 +374,7 @@ func TestAccAzureDevOpsBuildDefinition_Create_Update_Import(t *testing.T) {
 	buildDefinitionPathThird := `\` + buildDefinitionNameFirst + `\` + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 	buildDefinitionPathFourth := `\` + buildDefinitionNameSecond + `\` + acctest.RandStringFromCharSet(10, acctest.CharSetAlphaNum)
 
-	tfBuildDefNode := "azuredevops_build_definition.build"
+	tfBuildDefNode := "azuredevopsffuf_build_definition.build"
 	resource.Test(t, resource.TestCase{
 		PreCheck:     func() { testhelper.TestAccPreCheck(t, nil) },
 		Providers:    testAccProviders,
@@ -468,7 +469,7 @@ func TestAccAzureDevOpsBuildDefinitionBitbucket_Create(t *testing.T) {
 // or not the definition (1) exists in the state and (2) exist in AzDO and (3) has the correct name
 func testAccCheckBuildDefinitionResourceExists(expectedName string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		buildDef, ok := s.RootModule().Resources["azuredevops_build_definition.build"]
+		buildDef, ok := s.RootModule().Resources["azuredevopsffuf_build_definition.build"]
 		if !ok {
 			return fmt.Errorf("Did not find a build definition in the TF state")
 		}
@@ -490,7 +491,7 @@ func testAccCheckBuildDefinitionResourceExists(expectedName string) resource.Tes
 // *after* terrafform destroys the resource but *before* the state is wiped clean.
 func testAccBuildDefinitionCheckDestroy(s *terraform.State) error {
 	for _, resource := range s.RootModule().Resources {
-		if resource.Type != "azuredevops_build_definition" {
+		if resource.Type != "azuredevopsffuf_build_definition" {
 			continue
 		}
 
@@ -541,7 +542,7 @@ func sortBuildDefinition(b build.BuildDefinition) build.BuildDefinition {
 
 func TestAccBuildDefinition_Schedules(t *testing.T) {
 	name := testutils.GenerateResourceName()
-	tfNode := "azuredevops_build_definition.build"
+	tfNode := "azuredevopsffuf_build_definition.build"
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:     func() { testutils.PreCheck(t, nil) },
 		Providers:    testutils.GetProviders(),
@@ -579,7 +580,7 @@ resource "azuredevops_git_repository" "test" {
     init_type = "Clean"
   }
 }
-resource "azuredevops_build_definition" "build" {
+resource "azuredevopsffuf_build_definition" "build" {
   project_id = azuredevops_project.test.id
   name       = "%[1]s"
   path       = "\\ExampleFolder"

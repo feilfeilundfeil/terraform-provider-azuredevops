@@ -10,6 +10,7 @@ func Provider() *schema.Provider {
 	p := &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
 			"azuredevopsffuf_release_definition": resourceReleaseDefinition(),
+			"azuredevopsffuf_build_definition":   resourceBuildDefinition(),
 		},
 		Schema: map[string]*schema.Schema{
 			"org_service_url": {

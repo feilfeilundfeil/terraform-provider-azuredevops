@@ -228,7 +228,7 @@ repository {
 }`, repoType, repoName, branchName, yamlPath, serviceConnectionID)
 
 	buildDefinitionResource := fmt.Sprintf(`
-resource "azuredevops_build_definition" "build" {
+resource "azuredevopsffuf_build_definition" "build" {
 	project_id      = azuredevops_project.project.id
 	name            = "%s"
 	agent_pool_name = "Hosted Ubuntu 1604"
