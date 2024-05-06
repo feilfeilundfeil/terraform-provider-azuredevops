@@ -1,7 +1,7 @@
 TEST?=$$(go list ./... |grep -v 'vendor')
 WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=azuredevopsffuf
-VERSION=1.0.0
+VERSION=1.0.1
 BINARY=terraform-provider-${PKG_NAME}_v${VERSION}
 TESTTIMEOUT=180m
 
