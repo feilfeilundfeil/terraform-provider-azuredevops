@@ -141,6 +141,7 @@ func resourceBuildDefinition() *schema.Resource {
 					"macOS-11",
 					"macOS-12",
 					"macos-13",
+					"macOS-14",
 					"macos-latest",
 					"ubuntu-20.04",
 					"ubuntu-22.04",
